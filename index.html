@@ -2,82 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Physics Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Lab | Tigran</title>
     <style>
+        :root {
+            --primary: #6366f1;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
         }
 
-        .box {
-            background: white;
-            padding: 20px;
-            max-width: 400px;
-            margin: auto;
-            border-radius: 8px;
+        .container {
+            max-width: 800px;
+            padding: 2rem;
         }
 
-        input, button {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        #test {
-            display: none;
+        p {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .test-section {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #334155;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.2s;
+            cursor: pointer;
+        }
+
+            .btn:hover {
+                background-color: #4f46e5;
+                transform: translateY(-2px);
+            }
+
+        .footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #475569;
         }
     </style>
 </head>
 <body>
 
-    <div class="box" id="start">
-        <h2>Enter your information</h2>
-        <input type="text" id="firstName" placeholder="First Name">
-        <input type="text" id="lastName" placeholder="Last Name">
-        <button onclick="startTest()">Start Test</button>
+    <div class="container">
+        <h1>Physics Tests</h1>
+        <p>Exploring the laws of the universe through code.</p>
+
+        <div class="test-section">
+            <h2>Ready to Begin?</h2>
+            <p>Click the button below to view the current experiment modules and data simulations.</p>
+            <a href="#tests" class="btn">View All Tests</a>
+        </div>
+
+        <div class="footer">
+            &copy; 2025 tigrankhh | Hosted on GitHub
+        </div>
     </div>
-
-    <div class="box" id="test">
-        <h2>Physics Test</h2>
-        <p id="studentName"></p>
-
-        <p><strong>Question:</strong> What is the unit of force?</p>
-        <button onclick="checkAnswer('Newton')">Newton</button>
-        <button onclick="checkAnswer('Joule')">Joule</button>
-        <button onclick="checkAnswer('Watt')">Watt</button>
-
-        <p id="result"></p>
-    </div>
-
-    <script>
-        function startTest() {
-            const firstName = document.getElementById("firstName").value.trim();
-            const lastName = document.getElementById("lastName").value.trim();
-
-            if (firstName === "" || lastName === "") {
-                alert("Please enter your name and last name.");
-                return;
-            }
-
-            document.getElementById("start").style.display = "none";
-            document.getElementById("test").style.display = "block";
-
-            document.getElementById("studentName").innerText =
-                "Student: " + firstName + " " + lastName;
-        }
-
-        function checkAnswer(answer) {
-            const result = document.getElementById("result");
-            if (answer === "Newton") {
-                result.innerText = "Correct!";
-                result.style.color = "green";
-            } else {
-                result.innerText = "Wrong answer.";
-                result.style.color = "red";
-            }
-        }
-    </script>
 
 </body>
 </html>
