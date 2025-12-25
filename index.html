@@ -12,26 +12,33 @@
             --text: #f8fafc;
         }
 
+        /* Smooth scrolling effect */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
         }
 
         .container {
             max-width: 800px;
-            padding: 2rem;
+            padding: 5rem 2rem;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 0.5rem;
             background: linear-gradient(to right, #818cf8, #c084fc);
             -webkit-background-clip: text;
@@ -40,10 +47,10 @@
 
         .test-section {
             background: var(--card);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            border-radius: 1.5rem;
             border: 1px solid #334155;
+            text-align: center;
         }
 
         .btn {
@@ -54,20 +61,34 @@
             border-radius: 0.5rem;
             text-decoration: none;
             font-weight: bold;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: 0.2s;
             cursor: pointer;
-            border: none;
             font-size: 1.2rem;
         }
 
             .btn:hover {
                 background-color: #4f46e5;
-                transform: translateY(-2px);
+                transform: translateY(-3px);
             }
 
+        /* New section for your actual tests */
+        .tests-list {
+            width: 100%;
+            max-width: 800px;
+            padding: 5rem 2rem;
+            text-align: left;
+        }
+
+        .test-card {
+            background: #1e293b;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            border-left: 5px solid var(--primary);
+        }
+
         .footer {
-            margin-top: 3rem;
-            font-size: 0.9rem;
+            padding: 2rem;
             color: #475569;
         }
     </style>
@@ -75,19 +96,33 @@
 <body>
 
     <div class="container">
-        <h1>Physics Tests</h1>
-        <p style="color: #94a3b8; font-size: 1.2rem; margin-bottom: 2rem;">Exploring the laws of the universe through code.</p>
+        <h1>Physics Lab</h1>
+        <p style="color: #94a3b8; font-size: 1.3rem; margin-bottom: 2rem;">Welcome, Tigran.</p>
 
         <div class="test-section">
-            <h2 style="margin-top: 0;">Ready to Begin?</h2>
-            <p style="color: #94a3b8; margin-bottom: 2rem;">Click the button below to see all your physics experiment files.</p>
+            <h2>Physics Experiments</h2>
+            <p style="color: #94a3b8; margin-bottom: 2.5rem;">Ready to view the laboratory reports and tests?</p>
 
-            <a href="https://github.com/tigrankhh/physics/tree/main" class="btn">GO TO TESTS</a>
+            <a href="#my-tests" class="btn">VIEW TESTS</a>
+        </div>
+    </div>
+
+    <div id="my-tests" class="tests-list">
+        <h2 style="border-bottom: 2px solid #334155; padding-bottom: 1rem;">Available Tests</h2>
+
+        <div class="test-card">
+            <h3>Test 1: Kinematics</h3>
+            <p>Analysis of motion, velocity, and acceleration.</p>
         </div>
 
-        <div class="footer">
-            &copy; 2025 tigrankhh | Hosted on GitHub
+        <div class="test-card">
+            <h3>Test 2: Dynamics</h3>
+            <p>Force, mass, and Newton's Laws of Motion.</p>
         </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2025 tigrankhh | Physics Project
     </div>
 
 </body>
