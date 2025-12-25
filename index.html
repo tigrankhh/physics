@@ -2,179 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Physics Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Lab</title>
 
     <style>
-        :root {
-            --primary: #6366f1;
-            --bg: #0f172a;
-            --card: #1e293b;
-            --text: #f8fafc;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: #0f172a;
+            color: #f8fafc;
+            font-family: Arial, sans-serif;
+            padding: 2rem;
         }
 
-        .container {
-            max-width: 800px;
-            padding: 5rem 2rem;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(to right, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .test-section {
-            background: var(--card);
-            padding: 3rem;
-            border-radius: 1.5rem;
-            border: 1px solid #334155;
+        h1, h2 {
             text-align: center;
-            width: 100%;
+            color: #818cf8;
         }
 
-        input {
-            width: 80%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border-radius: 0.4rem;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .btn {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 3rem;
-            border-radius: 0.5rem;
-            border: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 1rem;
-        }
-
-            .btn:hover {
-                background-color: #4f46e5;
-                transform: translateY(-3px);
-            }
-
-        .tests-list {
-            width: 100%;
-            max-width: 800px;
-            padding: 5rem 2rem;
-            text-align: left;
-        }
-
-        .test-card {
+        .question {
             background: #1e293b;
             padding: 1.5rem;
             margin-bottom: 1rem;
             border-radius: 0.5rem;
-            border-left: 5px solid var(--primary);
         }
 
-        .footer {
-            padding: 2rem;
-            color: #475569;
+        label {
+            display: block;
+            margin: 0.4rem 0;
+        }
+
+        button {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: #6366f1;
+            color: white;
+            cursor: pointer;
+        }
+
+        #result {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-top: 2rem;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>Physics Lab</h1>
+    <h1 id="welcome"></h1>
 
-        <p id="welcomeText" style="color:#94a3b8;font-size:1.3rem;margin-bottom:2rem;"></p>
+    <form id="test"></form>
 
-        <div class="test-section" id="nameSection">
-            <h2>Enter Your Name</h2>
+    <button onclick="submitTest()">Submit</button>
 
-            <input type="text" id="firstName" placeholder="First Name">
-            <input type="text" id="lastName" placeholder="Last Name">
-
-            <button class="btn" onclick="saveName()">START</button>
-        </div>
-
-        <div class="test-section" id="testSection" style="display:none;">
-            <h2>Physics Experiments</h2>
-            <p style="color:#94a3b8;margin-bottom:2.5rem;">
-                Ready to view the laboratory reports and tests?
-            </p>
-
-            <a href="#my-tests" class="btn">VIEW TESTS</a>
-        </div>
-    </div>
-
-    <div id="my-tests" class="tests-list">
-        <h2 style="border-bottom:2px solid #334155;padding-bottom:1rem;">
-            Available Tests
-        </h2>
-
-        <div class="test-card">
-            <h3>Test 1: Kinematics</h3>
-            <p>Analysis of motion, velocity, and acceleration.</p>
-        </div>
-
-        <div class="test-card">
-            <h3>Test 2: Dynamics</h3>
-            <p>Force, mass, and Newton's Laws of Motion.</p>
-        </div>
-    </div>
-
-    <div class="footer">
-        &copy; 2025 tigrankhh | Physics Project
-    </div>
+    <div id="result"></div>
 
     <script>
-        function saveName() {
-            const first = document.getElementById("firstName").value.trim();
-            const last = document.getElementById("lastName").value.trim();
+        const name = localStorage.getItem("studentName");
+        if (!name) location.href = "index.html";
+        welcome.textContent = "Student: " + name;
 
-            if (!first || !last) {
-                alert("Please enter both first and last name");
-                return;
-            }
+        // QUESTION BANK (add more anytime)
+        const bank = [
+            { q: "SI unit of force?", a: ["Joule", "Newton", "Watt", "Pascal"], c: 1 },
+            { q: "Velocity is?", a: ["Scalar", "Vector", "Mass", "Energy"], c: 1 },
+            { q: "Who discovered gravity?", a: ["Einstein", "Newton", "Tesla", "Galileo"], c: 1 },
+            { q: "Unit of power?", a: ["Volt", "Watt", "Joule", "Newton"], c: 1 },
+            { q: "Acceleration means?", a: ["Speed", "Force", "Change in velocity", "Distance"], c: 2 },
+            { q: "Force equals?", a: ["m+a", "m×a", "m−a", "a/m"], c: 1 },
+            { q: "Which has direction?", a: ["Speed", "Temperature", "Velocity", "Time"], c: 2 },
+            { q: "Unit of work?", a: ["Newton", "Watt", "Joule", "Meter"], c: 2 },
+            { q: "Newton’s 3rd law?", a: ["F=ma", "Action-reaction", "Inertia", "Gravity"], c: 1 },
+            { q: "Mass unit?", a: ["Kg", "Newton", "Watt", "Joule"], c: 0 },
+            { q: "Speed unit?", a: ["m/s", "kg", "N", "J"], c: 0 },
+            { q: "Energy unit?", a: ["W", "N", "J", "kg"], c: 2 }
+        ];
 
-            localStorage.setItem("studentName", first + " " + last);
-            showWelcome();
+        // RANDOM 10 QUESTIONS
+        const questions = bank.sort(() => 0.5 - Math.random()).slice(0, 10);
+        const form = document.getElementById("test");
+
+        questions.forEach((q, i) => {
+            const div = document.createElement("div");
+            div.className = "question";
+            div.innerHTML = `<strong>${i + 1}. ${q.q}</strong>`;
+            q.a.forEach((ans, j) => {
+                div.innerHTML += `
+                <label>
+                    <input type="radio" name="q${i}" value="${j}">
+                    ${ans}
+                </label>`;
+            });
+            form.appendChild(div);
+        });
+
+        function submitTest() {
+            let score = 0;
+            questions.forEach((q, i) => {
+                const a = document.querySelector(`input[name="q${i}"]:checked`);
+                if (a && +a.value === q.c) score++;
+            });
+            result.innerHTML = `✅ Result: <b>${score} / 10</b>`;
         }
-
-        function showWelcome() {
-            const name = localStorage.getItem("studentName");
-
-            if (name) {
-                document.getElementById("welcomeText").textContent = "Welcome, " + name + ".";
-                document.getElementById("nameSection").style.display = "none";
-                document.getElementById("testSection").style.display = "block";
-            }
-        }
-
-        showWelcome();
     </script>
 
 </body>
 </html>
+
