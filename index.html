@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Lab | Tigran</title>
+    <title>Physics Lab</title>
+
     <style>
         :root {
             --primary: #6366f1;
@@ -12,7 +13,6 @@
             --text: #f8fafc;
         }
 
-        /* Smooth scrolling effect */
         html {
             scroll-behavior: smooth;
         }
@@ -51,19 +51,29 @@
             border-radius: 1.5rem;
             border: 1px solid #334155;
             text-align: center;
+            width: 100%;
+        }
+
+        input {
+            width: 80%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 0.4rem;
+            border: none;
+            font-size: 1rem;
         }
 
         .btn {
-            display: inline-block;
             background-color: var(--primary);
             color: white;
             padding: 1rem 3rem;
             border-radius: 0.5rem;
-            text-decoration: none;
+            border: none;
             font-weight: bold;
-            transition: 0.2s;
-            cursor: pointer;
             font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 1rem;
         }
 
             .btn:hover {
@@ -71,7 +81,6 @@
                 transform: translateY(-3px);
             }
 
-        /* New section for your actual tests */
         .tests-list {
             width: 100%;
             max-width: 800px;
@@ -93,22 +102,37 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
         <h1>Physics Lab</h1>
-        <p style="color: #94a3b8; font-size: 1.3rem; margin-bottom: 2rem;">Welcome, Tigran.</p>
 
-        <div class="test-section">
+        <p id="welcomeText" style="color:#94a3b8;font-size:1.3rem;margin-bottom:2rem;"></p>
+
+        <div class="test-section" id="nameSection">
+            <h2>Enter Your Name</h2>
+
+            <input type="text" id="firstName" placeholder="First Name">
+            <input type="text" id="lastName" placeholder="Last Name">
+
+            <button class="btn" onclick="saveName()">START</button>
+        </div>
+
+        <div class="test-section" id="testSection" style="display:none;">
             <h2>Physics Experiments</h2>
-            <p style="color: #94a3b8; margin-bottom: 2.5rem;">Ready to view the laboratory reports and tests?</p>
+            <p style="color:#94a3b8;margin-bottom:2.5rem;">
+                Ready to view the laboratory reports and tests?
+            </p>
 
             <a href="#my-tests" class="btn">VIEW TESTS</a>
         </div>
     </div>
 
     <div id="my-tests" class="tests-list">
-        <h2 style="border-bottom: 2px solid #334155; padding-bottom: 1rem;">Available Tests</h2>
+        <h2 style="border-bottom:2px solid #334155;padding-bottom:1rem;">
+            Available Tests
+        </h2>
 
         <div class="test-card">
             <h3>Test 1: Kinematics</h3>
@@ -124,6 +148,33 @@
     <div class="footer">
         &copy; 2025 tigrankhh | Physics Project
     </div>
+
+    <script>
+        function saveName() {
+            const first = document.getElementById("firstName").value.trim();
+            const last = document.getElementById("lastName").value.trim();
+
+            if (!first || !last) {
+                alert("Please enter both first and last name");
+                return;
+            }
+
+            localStorage.setItem("studentName", first + " " + last);
+            showWelcome();
+        }
+
+        function showWelcome() {
+            const name = localStorage.getItem("studentName");
+
+            if (name) {
+                document.getElementById("welcomeText").textContent = "Welcome, " + name + ".";
+                document.getElementById("nameSection").style.display = "none";
+                document.getElementById("testSection").style.display = "block";
+            }
+        }
+
+        showWelcome();
+    </script>
 
 </body>
 </html>
