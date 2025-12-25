@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Physics Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 8px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        #test {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box" id="start">
+        <h2>Enter your information</h2>
+        <input type="text" id="firstName" placeholder="First Name">
+        <input type="text" id="lastName" placeholder="Last Name">
+        <button onclick="startTest()">Start Test</button>
+    </div>
+
+    <div class="box" id="test">
+        <h2>Physics Test</h2>
+        <p id="studentName"></p>
+
+        <p><strong>Question:</strong> What is the unit of force?</p>
+        <button onclick="checkAnswer('Newton')">Newton</button>
+        <button onclick="checkAnswer('Joule')">Joule</button>
+        <button onclick="checkAnswer('Watt')">Watt</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function startTest() {
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+
+            if (firstName === "" || lastName === "") {
+                alert("Please enter your name and last name.");
+                return;
+            }
+
+            document.getElementById("start").style.display = "none";
+            document.getElementById("test").style.display = "block";
+
+            document.getElementById("studentName").innerText =
+                "Student: " + firstName + " " + lastName;
+        }
+
+        function checkAnswer(answer) {
+            const result = document.getElementById("result");
+            if (answer === "Newton") {
+                result.innerText = "Correct!";
+                result.style.color = "green";
+            } else {
+                result.innerText = "Wrong answer.";
+                result.style.color = "red";
+            }
+        }
+    </script>
+
+</body>
+</html>
